@@ -3,11 +3,7 @@ require 'webrick'
 
 module Phase8
   class Flash
-    # find the cookie for this app
-    # deserialize the cookie into a hash
-    attr_reader :new_flash
     def initialize(req)
-      @req = req # need this for building a new empty flash instance for #now
       cookie_data = req.cookies.find{ |cookie| cookie.name == '_rails_lite_app_flash' }
 
       # old_flash store the flash we get from req, available for current action
@@ -17,18 +13,22 @@ module Phase8
     end
 
     def [](key)
-      if @flash_now.new_flash.has_key?(key.to_s)
-        return @flash_now.new_flash.delete(key.to_s)
+      if @flash_now[key.to_s]  # if input key is symbol, but the key of hash is str
+        return @flash_now.delete(key.to_s)
+      elsif @flash_now[key] # both of them in same type
+        return @flash_now.delete(key)
+      elsif @flash_now[key.to_sym]  # if input key is string, but the key of hash is sym
+        return @flash_now.delete(key.to_sym)
       end
       @old_flash[key.to_s]
     end
 
-    def []=(key, val)
+    def []=(key, val)  #force to store as string
       @new_flash[key.to_s] = val
     end
 
     def now
-      @flash_now ||= Flash.new(@req)
+      @flash_now ||= {}
     end
 
     # serialize the hash into json and save in a cookie

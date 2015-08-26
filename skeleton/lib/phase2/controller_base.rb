@@ -9,6 +9,7 @@ module Phase2
     end
 
     # Helper method to alias @already_built_response
+    # Rails ask every action to at least redirect or render once, and no more than once!
     def already_built_response?
       @already_built_response
     end
