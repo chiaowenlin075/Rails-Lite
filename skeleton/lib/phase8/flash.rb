@@ -10,9 +10,9 @@ module Phase8
       @req = req # need this for building a new empty flash instance for #now
       cookie_data = req.cookies.find{ |cookie| cookie.name == '_rails_lite_app_flash' }
 
-      # old_flash store the flash we get from req, will user for current action
+      # old_flash store the flash we get from req, available for current action
       @old_flash = cookie_data ? JSON.parse(cookie_data.value) : {}
-      # new_flash store the new flash that supposed to be used in the next action
+      # new_flash store the new flash that supposed to be used in the next action --> store_flash
       @new_flash = {}
     end
 
@@ -33,7 +33,7 @@ module Phase8
 
     # serialize the hash into json and save in a cookie
     # add to the responses cookies
-    def store_flashes(res)
+    def store_flash(res)
       res.cookies << WEBrick::Cookie.new('_rails_lite_app_flash', @new_flash.to_json)
     end
   end

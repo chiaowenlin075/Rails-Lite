@@ -3,6 +3,18 @@ require_relative './flash'
 
 module Phase8
   class ControllerBase < Phase6::ControllerBase
+    # the reason why we overwrite this is we need to make sure that we
+    # actually do store the flash to res.cookies
+    def redirect_to(url)
+      super
+      flash.store_flash(res)
+    end
+
+    def render_content(content, content_type)
+      super
+      flash.store_flash(res)
+    end
+
     # method exposing a `Flash` object
     def flash
       @flash ||= Flash.new(req)
