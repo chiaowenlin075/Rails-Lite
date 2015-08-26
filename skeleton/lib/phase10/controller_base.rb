@@ -9,5 +9,9 @@ module Phase10
       super
       self.class.define_url_helpers
     end
+
+    def link_to(show_text, url, opts = {})
+      "<a href=\"#{url}\">#{show_text}</a>"
+    end
   end
 end

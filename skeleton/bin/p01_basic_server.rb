@@ -10,10 +10,10 @@ server = WEBrick::HTTPServer.new(:Port => 3000)
 
 server.mount_proc("/") do |request, response|
   response.cookies << WEBrick::Cookie.new("cat_session", { "name" => "Sennacy"}.to_json )
-  byebug
+  # byebug
   response.content_type = "text/text"
   response.body = request.path
-  # response.body = "<h1>#{request.query}</h1>"
+  # response.body = "<h1><script>#{request.query}</script></h1>"
 end
 
 

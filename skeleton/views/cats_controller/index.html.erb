@@ -2,4 +2,4 @@
 <pre><%= cat %></pre>
 <a href="/cats/new">New cat!</a>
 <%= form_authenticity_token %>
-<p><%= edit_cat_url(cat) %></p>
+<p><%= link_to "Edit Cat", edit_cat_url(cat) %></p>
