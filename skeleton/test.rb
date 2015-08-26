@@ -39,3 +39,24 @@ def render(opts = {})
 
   result = ERB.new(File.read("test.html.erb")).result(b)
 end
+
+
+module Test
+  def self.name
+    self.to_s.downcase
+  end
+
+  # define_method("#{name}_gizmo") do
+  #   return "Gizmo"
+  # end
+
+  def get_name
+    puts "instance methods here success!"
+  end
+
+end
+
+class Test2
+  include Test
+
+end

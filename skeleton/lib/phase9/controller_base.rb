@@ -46,7 +46,7 @@ module Phase9
       render(action_name.to_s) unless already_built_response?
     end
 
-    # let render capable of taking optional hash
+    # let render capable of taking optional hash, but not for partial, just extra function
     def render(template_name, opts = {})
       b = binding # set local variables for opts elements that can be use in the template
       opts.each { |k,v| b.local_variable_set(k.to_s, v) }
