@@ -17,21 +17,18 @@ module UrlHelpers
     }
   end
 
-  # index, create: no argument
   def define_index_url
     define_method("#{resource_name}_url") do
      "#{self.class.resource_name}/"
     end
   end
 
-  # new: no argument
   def define_new_url
     define_method("new_#{singular_name}_url") do
      "#{self.class.resource_name}/new"
     end
   end
 
-  # show, destroy, update: argument should be either instance object or id
   def define_show_url
     define_method("#{singular_name}_url") do |arg|
       raise ArgumentError unless arg.to_s =~ /^\d+$/ || arg.respond_to?(:id)
@@ -45,7 +42,6 @@ module UrlHelpers
     end
   end
 
-  # edit: argument should be either instance object or id
   def define_edit_url
     define_method("edit_#{singular_name}_url") do |arg|
       raise ArgumentError unless arg.to_s =~ /^\d+$/ || arg.respond_to?(:id)
