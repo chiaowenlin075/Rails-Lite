@@ -5,6 +5,7 @@ require 'active_support/inflector'
 
 require_relative './session'
 require_relative './params'
+require_relative './router'
 require_relative './flash'
 require_relative './url_helpers'
 
